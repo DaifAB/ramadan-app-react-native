@@ -1,25 +1,24 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View,SafeAreaView,ScrollView  } from 'react-native';
-import { RamadanHome } from './app/ramadan/screens/ramadan-home';
-import { RamadanMap } from './app/ramadan/screens/ramadan-map';
+import {NativeRouter, Switch, Route, Redirect} from 'react-router-native'
+import addAssistance from './app/assistances/screens/addAssistance';
+import findAssistance from './app/assistances/screens/findAssistance';
+import addBreakfast from './app/breakfasts/screens/addBreakfast';
+import findBreakfast from './app/breakfasts/screens/findBreakfast';
+import Home from './app/shared/componenets/Home';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Test App , working !</Text>
-      <StatusBar style="auto" />
-      <RamadanHome></RamadanHome>
-      <RamadanMap></RamadanMap>
-    </View>
+    <NativeRouter>
+      <Switch>
+        <Redirect exact from="/" to="/home" />
+        <Route exact path="/home" component={Home} />
+        <Route exact path="/addAssist" component={addAssistance} />
+        <Route exact path="/getAssist" component={findAssistance} />
+        <Route exact path="/addFutor" component={addBreakfast} />
+        <Route exact path="/getFutor" component={findBreakfast} />
+      </Switch>
+    </NativeRouter>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

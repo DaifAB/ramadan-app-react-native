@@ -12,7 +12,7 @@ export class RamadanService {
         *
         *
         * Ici c'est le code d'insertion dans la base de données Firestore
-        * 
-        */ 
+        *
+        */
       }
 }
