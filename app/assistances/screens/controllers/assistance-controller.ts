@@ -13,4 +13,10 @@ export class AssistanceController {
       
       this.assistanceService.add(assistance);
   }
+
+    async GetAll(){
+      let a = await new AssistanceService().getAllAssistances();
+   console.log(a);
+   ;
+}
 }

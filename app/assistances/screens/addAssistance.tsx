@@ -29,6 +29,8 @@ export default function addAssistance({history} : any) {
         assistance.longitude=Number(longitude);
 
         assistanceController.Add(assistance);
+
+        history.push('/home');
     }
 
 
