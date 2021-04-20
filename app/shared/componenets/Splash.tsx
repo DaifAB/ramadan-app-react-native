@@ -1,5 +1,5 @@
 import React from "react";
-import { ImageBackground  } from 'react-native';
+import { ImageBackground,StyleSheet  } from 'react-native';
 
 
 export default function Splash({history} : any) {
@@ -10,8 +10,20 @@ export default function Splash({history} : any) {
 
 
     return (
-        <ImageBackground source={require('../../../assets/splashApp.png')}>
-            
+        <ImageBackground
+        style={styles.imageBackground}
+         source={require('../../../assets/splashApp.png')}>
         </ImageBackground>
     )
 }
+
+const styles = StyleSheet.create({
+    imageBackground : {
+        flex : 1,
+        flexDirection : 'column',
+        alignItems : 'center',
+        justifyContent : 'space-around',
+        paddingVertical : 100
+    }
+
+  });
