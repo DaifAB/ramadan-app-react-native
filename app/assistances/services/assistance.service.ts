@@ -1,16 +1,17 @@
-import firebase from "firebase/app";
-import "firebase/auth";
-import "firebase/firestore";
+// import firebase from "firebase/app";
+// import "firebase/auth";
+// import "firebase/firestore";
+
+// @ts-ignore
+import firebase from '../../../environments/firebase';
+
 const db = firebase.firestore();
+
 
 export class AssistanceService {
     constructor(){ }
 
     add(assistance : any) {
-
-        console.log('====================================');
-    console.log(assistance);
-    console.log('========================fffffffffff============');
 
 
         if (db) {
@@ -20,10 +21,7 @@ export class AssistanceService {
                 description: assistance.description,
                 latitude: assistance.latitude,
                 longitude: assistance.longitude,
-    
             })
         }
-       
-     
       }
 }

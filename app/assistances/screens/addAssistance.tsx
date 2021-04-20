@@ -19,7 +19,7 @@ export default function addAssistance({history} : any) {
 
 
     function add(){
-        
+
         let assistance = new Assistance();
 
         assistance.city=city;
@@ -30,7 +30,7 @@ export default function addAssistance({history} : any) {
 
         assistanceController.Add(assistance);
     }
- 
+
 
 
 

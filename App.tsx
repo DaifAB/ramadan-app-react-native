@@ -7,22 +7,26 @@ import addBreakfast from './app/breakfasts/screens/addBreakfast';
 import findBreakfast from './app/breakfasts/screens/findBreakfast';
 import Home from './app/shared/componenets/Home';
 
-import firebase from 'firebase';
+// import firebase from 'firebase';
 import Splash from './app/shared/componenets/Splash';
 
 // import 'firebase/firestore';
 
  // Your web app's Firebase configuration
- var firebaseConfig = {
-  apiKey: "AIzaSyAWNIV8yVQ_J58tbosUltElh5I-9mCDDdw",
-  authDomain: "ramdan-mubarak-app-ts.firebaseapp.com",
-  projectId: "ramdan-mubarak-app-ts",
-  storageBucket: "ramdan-mubarak-app-ts.appspot.com",
-  messagingSenderId: "762400960186",
-  appId: "1:762400960186:web:30f5fd416ba52e29735c83"
-};
+//  var firebaseConfig = {
+//   apiKey: "AIzaSyAWNIV8yVQ_J58tbosUltElh5I-9mCDDdw",
+//   authDomain: "ramdan-mubarak-app-ts.firebaseapp.com",
+//   projectId: "ramdan-mubarak-app-ts",
+//   storageBucket: "ramdan-mubarak-app-ts.appspot.com",
+//   messagingSenderId: "762400960186",
+//   appId: "1:762400960186:web:30f5fd416ba52e29735c83"
+// };
 
-firebase.initializeApp(firebaseConfig);
+// if (!firebase.apps.length) {
+//   firebase.initializeApp(firebaseConfig);
+// }else {
+//   firebase.app();
+// }
 
 
 export default function App() {
