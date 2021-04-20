@@ -9,6 +9,8 @@ const db = firebase.firestore();
 
 
 export class AssistanceService {
+
+
     constructor(){ }
 
     add(assistance : any) {
@@ -23,5 +25,32 @@ export class AssistanceService {
                 longitude: assistance.longitude,
             })
         }
-      }
+    
+    
+    }
+
+     getAllAssistances(){
+
+    let allAssistance:any;
+
+        const allAssistances =  db
+        .collection("assistances")
+        .onSnapshot((querySnapshot : any) => {
+          const data =  querySnapshot.docs.map((doc : any) => ({
+            ...doc.data(),
+            id: doc.id,
+          }));
+        //   data.map((d:any)=>{
+        //     allAssistance = d;
+        //     console.log(allAssistance)
+        //   })
+          allAssistance = data;
+          return  data;         
+        });
+
+        // console.log('====================================');
+         console.log(allAssistances);
+        // console.log('====================================');
+        // return allAssistance;
+    }
 }
