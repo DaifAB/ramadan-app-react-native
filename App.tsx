@@ -7,7 +7,10 @@ import addBreakfast from './app/breakfasts/screens/addBreakfast';
 import findBreakfast from './app/breakfasts/screens/findBreakfast';
 import Home from './app/shared/componenets/Home';
 
-import * as firebase from 'firebase';
+import firebase from 'firebase/app';
+import Splash from './app/shared/componenets/Splash';
+
+// import 'firebase/firestore';
 
  // Your web app's Firebase configuration
  var firebaseConfig = {
@@ -26,7 +29,8 @@ export default function App() {
   return (
     <NativeRouter>
       <Switch>
-        <Redirect exact from="/" to="/home" />
+        {/* <Redirect exact from="/" to="/home" /> */}
+        <Route exact path="/" component={Splash} />
         <Route exact path="/home" component={Home} />
         <Route exact path="/addAssist" component={addAssistance} />
         <Route exact path="/getAssist" component={findAssistance} />
