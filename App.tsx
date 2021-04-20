@@ -7,7 +7,7 @@ import addBreakfast from './app/breakfasts/screens/addBreakfast';
 import findBreakfast from './app/breakfasts/screens/findBreakfast';
 import Home from './app/shared/componenets/Home';
 
-import firebase from 'firebase/app';
+import firebase from 'firebase';
 import Splash from './app/shared/componenets/Splash';
 
 // import 'firebase/firestore';
