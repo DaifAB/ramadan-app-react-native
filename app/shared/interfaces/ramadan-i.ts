@@ -1,8 +1,8 @@
 export interface RamadanI {
-    id: number;
-    username: string;
-    message: string;
+    nbPlaces:Number;
+    city: string;
+    description: string;
     latitude: Number;
-    longitude: Number;
+    longitude:Number;
   }
   
