@@ -38,7 +38,7 @@ export default function findAssistance({ history }: any) {
       style={styles.imageBackground}
       source={require("../../../assets/night.png")}
     >
-      <Map data={allAssistances} />
+      <Map data={allAssistances && allAssistances} />
     </ImageBackground>
   );
 }

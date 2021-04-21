@@ -4,10 +4,6 @@ import MapView, { Callout, Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import BackButton from "./BackButton";
 
 export function Map(props: any) {
-  console.log("====================================");
-  console.log(props.data);
-  console.log("====================================");
-
   const reservation = (id: any) => {
     console.log(id);
   };
@@ -24,11 +20,11 @@ export function Map(props: any) {
           longitudeDelta: 0.0121,
         }}
       >
-        {props.data ? (
+        {props.data &&
           props.data.map((item: any) => {
             return (
               <Marker
-                key={`${item.latitude}_${item.longitude}`}
+                key={item.id}
                 coordinate={{
                   latitude: item.latitude,
                   longitude: item.longitude,
@@ -47,10 +43,7 @@ export function Map(props: any) {
                 </Callout>
               </Marker>
             );
-          })
-        ) : (
-          <Text>t</Text>
-        )}
+          })}
       </MapView>
     </View>
   );
