@@ -11,9 +11,12 @@ export class AssistanceController {
     new AssistanceService().add(assistance);
   }
 
-   GetAll(){
-      let a = new AssistanceService().getAllAssistances();
-   console.log(a);
-   ;
+    async GetAll(){
+      let assistances = await new AssistanceService().getAllAssistances();
+  
+  //  console.log('====================222================');
+  //  console.log(assistances);
+  //  console.log('====================================');
+  return assistances
 }
 }
