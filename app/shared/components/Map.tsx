@@ -2,10 +2,31 @@ import React, { useEffect } from "react";
 import { Button, StyleSheet, Text, View } from "react-native";
 import MapView, { Callout, Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import BackButton from "./BackButton";
+import { useHistory } from "react-router-native";
+
+// @ts-ignore
+import firebase from '../../../environments/firebase';
+const db = firebase.firestore();
 
 export function Map(props: any) {
-  const reservation = (id: any) => {
-    console.log(id);
+
+  const history = useHistory();
+
+ 
+  
+
+  const reservation = (id: any,nbPlaces : any) => {
+
+    if (nbPlaces>0) {
+
+      db.collection(props.name).doc(id).update({
+        nbPlaces: nbPlaces -1 
+      });
+      console.log(id);
+      
+    }
+
+   
   };
 
   return (
@@ -33,8 +54,7 @@ export function Map(props: any) {
                 <Callout
                   tooltip
                   onPress={() => {
-                    console.log(item.id);
-                    reservation(item.id);
+                    reservation(item.id,item.nbPlaces);
                   }}
                 >
                   <View>
@@ -45,6 +65,11 @@ export function Map(props: any) {
             );
           })}
       </MapView>
+      <BackButton
+        onPress={() => {
+          history.push("/home");
+        }}
+      />
     </View>
   );
 }

@@ -54,7 +54,7 @@ export default function addAssistance({ history }: any) {
         onChangeText={setNbPlaces}
         value={nbPlaces}
         placeholder="Places Number"
-        keyboardType="numeric"
+        
       />
 
       <TextInput
@@ -62,7 +62,7 @@ export default function addAssistance({ history }: any) {
         onChangeText={setLatitude}
         value={latitude}
         placeholder="Latitude"
-        keyboardType="numeric"
+        
       />
 
       <TextInput
@@ -70,7 +70,7 @@ export default function addAssistance({ history }: any) {
         onChangeText={setLongitude}
         value={longitude}
         placeholder="Longtitude"
-        keyboardType="numeric"
+        
       />
       <TextInput
         multiline

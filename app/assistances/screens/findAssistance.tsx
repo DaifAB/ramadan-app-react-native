@@ -15,6 +15,7 @@ import { Map } from "../../shared/components/Map";
 import { AssistanceController } from "./controllers/assistance-controller";
 
 export default function findAssistance({ history }: any) {
+  
   const [allAssistances, setAllAssistances] = useState(null);
 
   useEffect(() => {
@@ -38,7 +39,7 @@ export default function findAssistance({ history }: any) {
       style={styles.imageBackground}
       source={require("../../../assets/night.png")}
     >
-      <Map data={allAssistances && allAssistances} />
+      <Map data={allAssistances && allAssistances} name="assistances" />
     </ImageBackground>
   );
 }

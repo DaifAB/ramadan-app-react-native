@@ -10,4 +10,10 @@ export class BreakfastController {
   Add(breakfast:Breakfast){
     new BreakfastService().add(breakfast);
   }
+
+  async GetAll(){
+    let breakfasts = await new BreakfastService().getAllBreakfasts();
+
+  return breakfasts
+}
 }

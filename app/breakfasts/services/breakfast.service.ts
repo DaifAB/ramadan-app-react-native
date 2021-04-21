@@ -23,4 +23,22 @@ export class BreakfastService {
         }
 
     }
+
+
+
+    async getAllBreakfasts() {
+
+            
+
+        const breakfasts = firebase.firestore().collection('breakfasts')
+        const querySnapshot = await breakfasts.get()
+        const tempDoc = querySnapshot.docs.map((doc:any) => {
+          return { id: doc.id, ...doc.data() }
+        })
+        
+        const allBreakfast = tempDoc;
+     
+      
+        return allBreakfast;
+    }
 }
