@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Text, View,StyleSheet, TextInput, FlatList, TouchableOpacity, ScrollView, ImageBackground } from 'react-native';
+import { Map } from '../../shared/components/Map';
 
 import { AssistanceController } from './controllers/assistance-controller';
 
@@ -8,7 +9,16 @@ import { AssistanceController } from './controllers/assistance-controller';
 export default function findAssistance({history} : any) {
 
 
-    const [allAssistances, setAllAssistances] = useState([]);
+    const [allAssistances, setAllAssistances] = useState([
+      {
+      "city": "",
+      "description": "",
+      "id": "",
+      "latitude": 0,
+      "longitude": 0,
+      "nbPlaces": 0,
+    }
+  ]);
 
 
 
@@ -19,11 +29,7 @@ export default function findAssistance({history} : any) {
 
             let data = await assistanceController.GetAll();
 
-        console.log('====================================*');
-        console.log(data);
-        console.log('====================================*');
-
-        setAllAssistances(data);
+          setAllAssistances(data);
 
         }    
         getAllAssistances();
@@ -48,17 +54,7 @@ export default function findAssistance({history} : any) {
         source={require('../../../assets/night.png')}
         >
             
-            <FlatList
-        keyExtractor={(item :any)=> item.id}
-        data={allAssistances}
-        renderItem={({ item })=>(
-          <TouchableOpacity onPress={()=> pressHandler(item.id)}>
-          <Text style={styles.item}> city : {item.city} nbPlce : {item.nbPlaces} </Text>
-          
-          </TouchableOpacity>
-        )}
-        
-        />
+       <Map data={allAssistances}/>
         </ImageBackground>
 
      
