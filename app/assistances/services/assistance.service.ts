@@ -29,28 +29,26 @@ export class AssistanceService {
     
     }
 
-     getAllAssistances(){
 
-    let allAssistance:any;
+    async getAllAssistances() {
 
-        const allAssistances =  db
-        .collection("assistances")
-        .onSnapshot((querySnapshot : any) => {
-          const data =  querySnapshot.docs.map((doc : any) => ({
-            ...doc.data(),
-            id: doc.id,
-          }));
-        //   data.map((d:any)=>{
-        //     allAssistance = d;
-        //     console.log(allAssistance)
-        //   })
-          allAssistance = data;
-          return  data;         
-        });
+            
 
+        const assistances = firebase.firestore().collection('assistances')
+        const querySnapshot = await assistances.get()
+        const tempDoc = querySnapshot.docs.map((doc:any) => {
+          return { id: doc.id, ...doc.data() }
+        })
         // console.log('====================================');
-         console.log(allAssistances);
+        // console.log(tempDoc);
         // console.log('====================================');
-        // return allAssistance;
+        const allAssistances = tempDoc;
+     
+        // console.log('********************************');
+        // console.log(allAssistances);
+        // console.log('********************************');
+        return allAssistances;
     }
+
+
 }
