@@ -4,8 +4,10 @@ import MapView, { Callout, Marker, PROVIDER_GOOGLE } from "react-native-maps";
 
 export function Map(props:any) {
 
-  console.log(props.data);
   
+  console.log('====================================');
+  console.log(props.data);
+  console.log('====================================');
 
 
   const reservation=(id:any)=>{
@@ -29,29 +31,42 @@ export function Map(props:any) {
       >
 
         {
-          props.data.map((item:any)=>{
+          props.data ? (
+            props.data.map((item:any)=>{
 
-            <Marker key={item.id}
-            coordinate={{
-              latitude:item.latitude,
-              longitude: item.longitude,
-            }}
-          >
-            <Callout
-              tooltip
-              onPress={() => {
-                console.log(item.id);
-                reservation(item.id)
+              console.log('====================================***');
+              console.log(item);
+              console.log('====================================****');
+              <Marker key={item.id}
+              coordinate={{
+                latitude: 32.29512789087331,
+                longitude: -9.233774559186537,
               }}
             >
-              <View>
-                <Text>Click me !</Text>
-              </View>
-            </Callout>
-          </Marker>
+              <Callout
+                tooltip
+                onPress={() => {
+                  console.log(item.id);
+                  reservation(item.id)
+                }}
+              >
+                <View>
+                  <Text>Click me !</Text>
+                </View>
+              </Callout>
+            </Marker>
 
-          })
+          
+  
+            })
+          ):(
+            <Text>t</Text>
+            
+         
+          )
         }
+
+     
 
       
     

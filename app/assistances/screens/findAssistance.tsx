@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Text, View,StyleSheet, TextInput, FlatList, TouchableOpacity, ScrollView, ImageBackground } from 'react-native';
+import BackButton from '../../shared/components/BackButton';
 import { Map } from '../../shared/components/Map';
 
 import { AssistanceController } from './controllers/assistance-controller';
@@ -9,16 +10,7 @@ import { AssistanceController } from './controllers/assistance-controller';
 export default function findAssistance({history} : any) {
 
 
-    const [allAssistances, setAllAssistances] = useState([
-      {
-      "city": "",
-      "description": "",
-      "id": "",
-      "latitude": 0,
-      "longitude": 0,
-      "nbPlaces": 0,
-    }
-  ]);
+    const [allAssistances, setAllAssistances] = useState(null);
 
 
 
@@ -53,8 +45,15 @@ export default function findAssistance({history} : any) {
         style={styles.imageBackground}
         source={require('../../../assets/night.png')}
         >
+
+    
             
        <Map data={allAssistances}/>
+       <BackButton
+        onPress={() => {
+          history.push("/home");
+        }}
+      />
         </ImageBackground>
 
      
