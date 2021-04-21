@@ -1,21 +1,16 @@
 import React, { useEffect } from "react";
 import { Button, StyleSheet, Text, View } from "react-native";
 import MapView, { Callout, Marker, PROVIDER_GOOGLE } from "react-native-maps";
+import BackButton from "./BackButton";
 
-export function Map(props:any) {
-
-  
-  console.log('====================================');
+export function Map(props: any) {
+  console.log("====================================");
   console.log(props.data);
-  console.log('====================================');
+  console.log("====================================");
 
-
-  const reservation=(id:any)=>{
-
+  const reservation = (id: any) => {
     console.log(id);
-    
-  }
- 
+  };
 
   return (
     <View style={styles.container}>
@@ -29,48 +24,33 @@ export function Map(props:any) {
           longitudeDelta: 0.0121,
         }}
       >
-
-        {
-          props.data ? (
-            props.data.map((item:any)=>{
-
-              console.log('====================================***');
-              console.log(item);
-              console.log('====================================****');
-              <Marker key={item.id}
-              coordinate={{
-                latitude: 32.29512789087331,
-                longitude: -9.233774559186537,
-              }}
-            >
-              <Callout
-                tooltip
-                onPress={() => {
-                  console.log(item.id);
-                  reservation(item.id)
+        {props.data ? (
+          props.data.map((item: any) => {
+            return (
+              <Marker
+                key={`${item.latitude}_${item.longitude}`}
+                coordinate={{
+                  latitude: item.latitude,
+                  longitude: item.longitude,
                 }}
               >
-                <View>
-                  <Text>Click me !</Text>
-                </View>
-              </Callout>
-            </Marker>
-
-          
-  
-            })
-          ):(
-            <Text>t</Text>
-            
-         
-          )
-        }
-
-     
-
-      
-    
-      
+                <Callout
+                  tooltip
+                  onPress={() => {
+                    console.log(item.id);
+                    reservation(item.id);
+                  }}
+                >
+                  <View>
+                    <Text>Click me !</Text>
+                  </View>
+                </Callout>
+              </Marker>
+            );
+          })
+        ) : (
+          <Text>t</Text>
+        )}
       </MapView>
     </View>
   );
