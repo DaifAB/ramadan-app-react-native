@@ -8,14 +8,11 @@ export class AssistanceController {
   constructor() { }
 
   Add(assistance:Assistance){
-
-    
-      
-      this.assistanceService.add(assistance);
+    new AssistanceService().add(assistance);
   }
 
-    async GetAll(){
-      let a = await new AssistanceService().getAllAssistances();
+   GetAll(){
+      let a = new AssistanceService().getAllAssistances();
    console.log(a);
    ;
 }

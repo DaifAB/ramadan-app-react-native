@@ -1,28 +1,40 @@
-import React, { useState } from 'react'
-import { Button, Text, View,StyleSheet, TextInput } from 'react-native';
+import React, { useState } from "react";
+import { ImageBackground, StyleSheet } from "react-native";
+import AppButton from "../../shared/components/AppButton";
+import BackButton from "../../shared/components/BackButton";
 
-import { AssistanceController } from './controllers/assistance-controller';
+import { AssistanceController } from "./controllers/assistance-controller";
 
+export default function findAssistance({ history }: any) {
+  const [allAssistances, setAllAssistances] = useState([]);
 
+  //   let assistanceController = new AssistanceController();
 
-export default function findAssistance({history} : any) {
+  //   let y = assistanceController.GetAll();
 
+  // console.log(y);
 
-    const [allAssistances, setAllAssistances] = useState([]);
-
-    let assistanceController = new  AssistanceController();
-
-    let y = assistanceController.GetAll();
-
-    // console.log(y);
-    
-
-    return (
-        <View style={{flex : 1, justifyContent : 'center', alignItems : 'center'}}>
-            <Text> Get assistance component</Text>
-            <Button title='Back' onPress={()=>{history.push('/home')}}/>
-        </View>
-    )
+  return (
+    <ImageBackground
+      style={styles.imageBackground}
+      source={require("../../../assets/night.png")}
+    >
+      <BackButton
+        onPress={() => {
+          history.push("/home");
+        }}
+      />
+      <AppButton title="Show Assistances" onPress={() => {}} />
+    </ImageBackground>
+  );
 }
 
-
+const styles = StyleSheet.create({
+  imageBackground: {
+    flex: 1,
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "space-around",
+    paddingVertical: 100,
+  },
+});

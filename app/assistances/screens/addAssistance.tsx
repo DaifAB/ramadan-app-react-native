@@ -1,105 +1,112 @@
-import React, { useState } from 'react'
-import { Button, Text, View,StyleSheet, TextInput } from 'react-native';
+import React, { useState } from "react";
+import { StyleSheet, TextInput, ImageBackground, Image } from "react-native";
+import AppButton from "../../shared/components/AppButton";
+import { AssistanceController } from "./controllers/assistance-controller";
+import { Assistance } from "../../shared/models/assistances.model";
+import BackButton from "../../shared/components/BackButton";
 
-import { AssistanceController } from './controllers/assistance-controller';
-import { Assistance } from '../../shared/models/assistances.model'
+export default function addAssistance({ history }: any) {
+  let assistanceController = new AssistanceController();
 
+  const [city, setCity] = useState("");
+  const [nbPlaces, setNbPlaces] = useState("");
+  const [description, setDescription] = useState("");
+  const [latitude, setLatitude] = useState("");
+  const [longitude, setLongitude] = useState("");
 
+  function add() {
+    let assistance = new Assistance();
 
-export default function addAssistance({history} : any) {
+    assistance.city = city;
+    assistance.nbPlaces = Number(nbPlaces);
+    assistance.description = description;
+    assistance.latitude = Number(latitude);
+    assistance.longitude = Number(longitude);
 
-    let assistanceController = new  AssistanceController();
+    assistanceController.Add(assistance);
 
+    history.push("/home");
+  }
 
-    const [city, setCity] = useState("");
-    const [nbPlaces, setNbPlaces] = useState("");
-    const [description, setDescription] = useState("");
-    const [latitude, setLatitude] = useState("");
-    const [longitude, setLongitude] = useState("");
-
-
-    function add(){
-
-        let assistance = new Assistance();
-
-        assistance.city=city;
-        assistance.nbPlaces=Number(nbPlaces);
-        assistance.description=description;
-        assistance.latitude=Number(latitude);
-        assistance.longitude=Number(longitude);
-
-        assistanceController.Add(assistance);
-
-        history.push('/home');
-    }
-
-
-
-
-    return (
-        <View style={{flex : 1, justifyContent : 'center', alignItems : 'center'}}>
-
-        <TextInput
+  return (
+    <ImageBackground
+      style={styles.imageBackground}
+      source={require("../../../assets/night.png")}
+    >
+      <BackButton
+        onPress={() => {
+          history.push("/home");
+        }}
+      />
+      <Image
+        style={styles.img}
+        source={require("../../../assets/pngwing.com.png")}
+      />
+      <TextInput
         style={styles.input}
         onChangeText={setCity}
         value={city}
         placeholder="City"
-        
-        />
+      />
 
-        <TextInput
+      <TextInput
+        style={styles.input}
+        onChangeText={setNbPlaces}
+        value={nbPlaces}
+        placeholder="Places Number"
+        keyboardType="numeric"
+      />
+
+      <TextInput
+        style={styles.input}
+        onChangeText={setLatitude}
+        value={latitude}
+        placeholder="Latitude"
+        keyboardType="numeric"
+      />
+
+      <TextInput
+        style={styles.input}
+        onChangeText={setLongitude}
+        value={longitude}
+        placeholder="Longtitude"
+        keyboardType="numeric"
+      />
+      <TextInput
+        multiline
+        numberOfLines={3}
         style={styles.input}
         onChangeText={setDescription}
         value={description}
         placeholder="Description"
-        
-        />
-
-        <TextInput
-        style={styles.input}
-        onChangeText={setNbPlaces}
-        value={nbPlaces}
-        placeholder="nb Places"
-        keyboardType="numeric"
-        />
-
-
-        <TextInput
-        style={styles.input}
-        onChangeText={setLatitude}
-        value={latitude}
-        placeholder="latitude"
-        keyboardType="numeric"
-        
-        />
-
-        <TextInput
-        style={styles.input}
-        onChangeText={setLongitude}
-        value={longitude}
-        placeholder="longtitude"
-        keyboardType="numeric"
-        
-        />
-
-
-        <Button
+      />
+      <AppButton
         title="Add"
         onPress={() => {
-            
-            add()
+          add();
         }}
       />
-            
-        </View>
-    )
+    </ImageBackground>
+  );
 }
 
-
 const styles = StyleSheet.create({
-    input: {
-      height: 40,
-      margin: 12,
-      borderWidth: 1,
-    },
-  });
+  input: {
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+    backgroundColor: "#fff",
+    borderRadius: 60,
+    width: "80%",
+  },
+  imageBackground: {
+    flex: 1,
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "space-around",
+    paddingVertical: 40,
+  },
+  img: {
+    width: 200,
+    height: 200,
+  },
+});

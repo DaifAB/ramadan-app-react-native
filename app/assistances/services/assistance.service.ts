@@ -25,13 +25,10 @@ export class AssistanceService {
                 longitude: assistance.longitude,
             })
         }
-    
-    
+
     }
 
      getAllAssistances(){
-
-    let allAssistance:any;
 
         const allAssistances =  db
         .collection("assistances")
@@ -40,17 +37,10 @@ export class AssistanceService {
             ...doc.data(),
             id: doc.id,
           }));
-        //   data.map((d:any)=>{
-        //     allAssistance = d;
-        //     console.log(allAssistance)
-        //   })
-          allAssistance = data;
-          return  data;         
+
+          return data;
         });
 
-        // console.log('====================================');
-         console.log(allAssistances);
-        // console.log('====================================');
-        // return allAssistance;
+        return allAssistances;
     }
 }
