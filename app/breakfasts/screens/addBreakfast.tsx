@@ -4,6 +4,8 @@ import AppButton from "../../shared/components/AppButton";
 import { BreakfastController } from "./controllers/breakfast-controller";
 import { Breakfast } from "../../shared/models/breakfast.model";
 import BackButton from "../../shared/components/BackButton";
+import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
+import mapStyle from "../../shared/components/mapStyle";
 
 export default function addBreakfast({ history }: any) {
   let breakfastController = new BreakfastController();
@@ -11,8 +13,19 @@ export default function addBreakfast({ history }: any) {
   const [city, setCity] = useState("");
   const [nbPlaces, setNbPlaces] = useState("");
   const [description, setDescription] = useState("");
-  const [latitude, setLatitude] = useState("");
-  const [longitude, setLongitude] = useState("");
+  const [region, setRegion] = useState({
+    latitude: 32.29512789087331,
+    longitude: -9.233774559186537,
+  });
+
+  function onRegionChange(region: any) {
+    setRegion(region);
+  }
+
+  let coordinates_marker = {
+    latitude: region.latitude,
+    longitude: region.longitude,
+  };
 
   function add() {
     let breakfast = new Breakfast();
@@ -20,8 +33,8 @@ export default function addBreakfast({ history }: any) {
     breakfast.city = city;
     breakfast.nbPlaces = Number(nbPlaces);
     breakfast.description = description;
-    breakfast.latitude = Number(latitude);
-    breakfast.longitude = Number(longitude);
+    breakfast.latitude = Number(region.latitude);
+    breakfast.longitude = Number(region.longitude);
 
     breakfastController.Add(breakfast);
 
@@ -54,24 +67,8 @@ export default function addBreakfast({ history }: any) {
         onChangeText={setNbPlaces}
         value={nbPlaces}
         placeholder="Places Number"
-        
       />
 
-      <TextInput
-        style={styles.input}
-        onChangeText={setLatitude}
-        value={latitude}
-        placeholder="Latitude"
-        
-      />
-
-      <TextInput
-        style={styles.input}
-        onChangeText={setLongitude}
-        value={longitude}
-        placeholder="Longtitude"
-        
-      />
       <TextInput
         multiline
         numberOfLines={3}
@@ -80,6 +77,21 @@ export default function addBreakfast({ history }: any) {
         value={description}
         placeholder="Description"
       />
+
+      <MapView
+        provider={PROVIDER_GOOGLE}
+        style={styles.map}
+        initialRegion={{
+          latitude: 32.29512789087331,
+          longitude: -9.233774559186537,
+          latitudeDelta: 0.0222,
+          longitudeDelta: 0.0121,
+        }}
+        customMapStyle={mapStyle}
+        onRegionChange={(region) => onRegionChange(region)}
+      >
+        <Marker coordinate={coordinates_marker}></Marker>
+      </MapView>
       <AppButton
         title="Add"
         onPress={() => {
@@ -106,7 +118,11 @@ const styles = StyleSheet.create({
     paddingVertical: 40,
   },
   img: {
-    width: 200,
-    height: 200,
+    width: 170,
+    height: 170,
+  },
+  map: {
+    width: "80%",
+    height: 150,
   },
 });
