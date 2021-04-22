@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Button, StyleSheet, Text, View } from "react-native";
+import { Alert, Button, StyleSheet, Text, View } from "react-native";
 import MapView, { Callout, Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import BackButton from "./BackButton";
 import { useHistory } from "react-router-native";
@@ -13,13 +13,27 @@ export function Map(props: any) {
   const history = useHistory();
 
   const reservation = (id: any, nbPlaces: any) => {
+
+
     if (nbPlaces > 0) {
+
       db.collection(props.name)
         .doc(id)
         .update({
           nbPlaces: nbPlaces - 1,
         });
-      console.log(id);
+
+        db.collection('reservation').add({
+          typeId: id,
+          name: "Kamal"
+         
+      })
+      
+      Alert.alert('Successful','Reservation Done',[{text: 'Ok',onPress:()=> history.push("/home")}])
+
+    }else{
+      Alert.alert('OOPS!','No Place Available',[{text: 'Ok',onPress:()=> history.push("/home")}])
+
     }
   };
 

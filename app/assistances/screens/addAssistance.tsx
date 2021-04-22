@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, TextInput, ImageBackground, Image } from "react-native";
+import { StyleSheet, TextInput, ImageBackground, Image, TouchableWithoutFeedback, Keyboard } from "react-native";
 import AppButton from "../../shared/components/AppButton";
 import { AssistanceController } from "./controllers/assistance-controller";
 import { Assistance } from "../../shared/models/assistances.model";
@@ -42,6 +42,7 @@ export default function addAssistance({ history }: any) {
   }
 
   return (
+    <TouchableWithoutFeedback  onPress={()=>{Keyboard.dismiss()}}>
     <ImageBackground
       style={styles.imageBackground}
       source={require("../../../assets/night.png")}
@@ -98,6 +99,7 @@ export default function addAssistance({ history }: any) {
         }}
       />
     </ImageBackground>
+    </TouchableWithoutFeedback>
   );
 }
 

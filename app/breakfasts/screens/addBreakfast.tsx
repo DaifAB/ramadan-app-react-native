@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, TextInput, ImageBackground, Image } from "react-native";
+import { StyleSheet, TextInput, ImageBackground, Image, TouchableWithoutFeedback, Keyboard } from "react-native";
 import AppButton from "../../shared/components/AppButton";
 import { BreakfastController } from "./controllers/breakfast-controller";
 import { Breakfast } from "../../shared/models/breakfast.model";
@@ -42,6 +42,7 @@ export default function addBreakfast({ history }: any) {
   }
 
   return (
+    <TouchableWithoutFeedback onPress={()=>{Keyboard.dismiss()}}>
     <ImageBackground
       style={styles.imageBackground}
       source={require("../../../assets/night.png")}
@@ -99,6 +100,7 @@ export default function addBreakfast({ history }: any) {
         }}
       />
     </ImageBackground>
+    </TouchableWithoutFeedback>
   );
 }
 
