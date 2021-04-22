@@ -3,30 +3,24 @@ import { Button, StyleSheet, Text, View } from "react-native";
 import MapView, { Callout, Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import BackButton from "./BackButton";
 import { useHistory } from "react-router-native";
+import mapStyle from "./mapStyle";
 
 // @ts-ignore
-import firebase from '../../../environments/firebase';
+import firebase from "../../../environments/firebase";
 const db = firebase.firestore();
 
 export function Map(props: any) {
-
   const history = useHistory();
 
- 
-  
-
-  const reservation = (id: any,nbPlaces : any) => {
-
-    if (nbPlaces>0) {
-
-      db.collection(props.name).doc(id).update({
-        nbPlaces: nbPlaces -1 
-      });
+  const reservation = (id: any, nbPlaces: any) => {
+    if (nbPlaces > 0) {
+      db.collection(props.name)
+        .doc(id)
+        .update({
+          nbPlaces: nbPlaces - 1,
+        });
       console.log(id);
-      
     }
-
-   
   };
 
   return (
@@ -40,6 +34,7 @@ export function Map(props: any) {
           latitudeDelta: 0.0222,
           longitudeDelta: 0.0121,
         }}
+        customMapStyle={mapStyle}
       >
         {props.data &&
           props.data.map((item: any) => {
@@ -54,11 +49,19 @@ export function Map(props: any) {
                 <Callout
                   tooltip
                   onPress={() => {
-                    reservation(item.id,item.nbPlaces);
+                    reservation(item.id, item.nbPlaces);
                   }}
                 >
-                  <View>
-                    <Text>Click me !</Text>
+                  <View style={styles.modal}>
+                    <Text style={styles.title}>Description</Text>
+                    <Text style={styles.text}>{item.description}</Text>
+                    <Text style={styles.title}>Places number</Text>
+                    {item.nbPlaces ? (
+                      <Text style={styles.text}>{item.nbPlaces}</Text>
+                    ) : (
+                      <Text style={styles.full}>Full</Text>
+                    )}
+                    <Text style={styles.press}>Press here to reserve</Text>
                   </View>
                 </Callout>
               </Marker>
@@ -82,10 +85,38 @@ const styles = StyleSheet.create({
   },
   text: {
     textAlign: "center",
+    fontSize: 15,
+    fontFamily: "monospace",
+  },
+  full: {
+    textAlign: "center",
+    fontSize: 15,
+    fontFamily: "monospace",
+    color: "red",
+  },
+  title: {
+    textAlign: "center",
+    fontSize: 20,
+    fontFamily: "monospace",
+    fontWeight: "bold",
+  },
+  press: {
+    textAlign: "center",
+    fontSize: 15,
+    fontFamily: "monospace",
+    color: "blue",
+    textDecorationLine: "underline",
   },
   map: {
     flex: 1,
     height: "100%",
     width: "100%",
+  },
+  modal: {
+    backgroundColor: "white",
+    width: 200,
+    padding: 10,
+    borderRadius: 10,
+    textAlign: "center",
   },
 });
